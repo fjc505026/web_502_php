@@ -1,0 +1,16 @@
+#UnitEnrol_ct{
+    margin-top: 2%;
+}
+
+#filterGroup{
+    margin-left: 20%;
+    margin-top: 2%;
+}
+
+#filterGroup>div{
+    margin-left: 5%;
+}
+
+.wd_btn{
+    display: none;
+}

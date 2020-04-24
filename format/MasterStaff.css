@@ -1,0 +1,24 @@
+#tut_col{
+    width: 15%;
+}
+
+.has_techUnit{
+    margin-left: 1%;
+}
+
+.no_techUnit{
+    margin-left: 1%;
+    display:none;
+
+}
+
+#Staff_ct{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+#staff_id{
+
+width: 50%;
+
+}

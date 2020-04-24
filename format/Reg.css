@@ -1,0 +1,13 @@
+body{
+    background-color:rgb(139, 137, 137)
+}
+
+body>div{
+    background-color:white; 
+    padding-top:2%;
+     padding-bottom: 3%;
+}
+
+#staff_id{
+   padding-right: 20%; 
+}

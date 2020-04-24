@@ -1,0 +1,105 @@
+[   
+   {
+     "Code":"kit501",
+     "Name": "ICT fundamental technology",
+     "Coordinator":"Tony Grey",
+     "Lecuter": "Jack simith",
+     "Day"     :"Monday",
+     "Start"   :"11:00",
+     "End"     :"13:00",
+      "Tutorial1":{
+         "Day":"Monday",
+         "Start":"8:00",
+         "End":"12:00",
+         "location":"Nth.7",
+         "current":"10",
+         "max":"20"
+      },
+      "Tutorial2":{
+         "Day":"Tuesday",
+         "Start":"11:00",
+         "End":"12:00",
+         "location":"Sth.16",
+         "current":"17",
+         "max":"20"
+      }
+    },
+    {
+      "Code":"kit502",
+      "Name": "web development",
+      "Coordinator":"Soonja Yeom",
+      "Lecuter": "Jesse wilson",
+      "Day"     :"Tuesday",
+      "Start"   :"12:00",
+      "End"     :"13:00",
+       "Tutorial1":{
+          "Day":"Tuesday",
+          "Start":"8:00",
+          "End":"12:00",
+          "location":"Nth.7",
+          "current":"10",
+          "max":"20"
+       },
+       "Tutorial2":{
+          "Day":"Wednesday",
+          "Start":"11:00",
+          "End":"12:00",
+          "location":"Sth.16",
+          "current":"17",
+          "max":"20"
+       }
+     },
+     {
+      "Code":"kit506",
+      "Name": "Software Application Design and Implementation",
+      "Coordinator":"Julian Dermoudy",
+      "Lecuter": "Tom Brendon",
+      "Day"     :"Wednesday",
+      "Start"   :"14:00",
+      "End"     :"15:00",
+       "Tutorial1":{
+          "Day":"Thrusday",
+          "Start":"8:00",
+          "End":"12:00",
+          "location":"Nth.7",
+          "current":"10",
+          "max":"20"
+       },
+       "Tutorial2":{
+          "Day":"Friday",
+          "Start":"11:00",
+          "End":"12:00",
+          "location":"Sth.16",
+          "current":"17",
+          "max":"20"
+       }
+     },
+
+ 
+     {
+      "Code":"kit712",
+      "Name": "Data Management Technology",
+      "Coordinator":"Saurabh Garg",
+      "Lecuter": "Scott Morrison",
+      "Day"     :"Friday",
+      "Start"   :"11:00",
+      "End"     :"13:00",
+       "Tutorial1":{
+          "Day":"Friday",
+          "Start":"8:00",
+          "End":"12:00",
+          "location":"Nth.7",
+          "current":"10",
+          "max":"20"
+       },
+       "Tutorial2":{
+          "Day":"Monday",
+          "Start":"9:00",
+          "End":"10:00",
+          "location":"Sth.16",
+          "current":"17",
+          "max":"20"
+       }
+     }
+
+]

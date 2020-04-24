@@ -1,0 +1,13 @@
+#Unit_ct{
+   margin-top: 5%;
+}
+
+#Unit_tb{
+   min-width:80%
+}
+
+tr.detail-view{
+  background-color: ivory;
+  display: none;
+}
+
