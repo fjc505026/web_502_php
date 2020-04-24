@@ -9,7 +9,7 @@
         <title>Registration</title>
     </head>
     <body class="jumbotron">
-    <!-- action ="../JS/staffsubmit.php" -->
+    <!-- action ="../action/staffsubmit.php" -->
         <form name="Register_form"  method="post" onsubmit="validateFunc()">
             <div class="container">
                 <div name="Register_form" class="form-group">

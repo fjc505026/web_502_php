@@ -2,8 +2,8 @@
 --user table
 CREATE TABLE `jfan6`.`user` (
         `user_id` INT(10) NOT NULL AUTO_INCREMENT , 
-        `username` INT(20) NOT NULL ,
-        `password` INT(20) NOT NULL ,
+        `username` VARCHAR(20) NOT NULL ,
+        `password` VARCHAR(20) NOT NULL ,
         `gender` VARCHAR(5) NOT NULL ,
         `DOB` DATE NOT NULL , 
         `fname` VARCHAR(50) NOT NULL , 

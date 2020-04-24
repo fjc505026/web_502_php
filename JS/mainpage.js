@@ -12,9 +12,9 @@ $(document).ready(function() {
   $(".priority").on('click',function () {
     AccountValid=true;  //for debug
     if(AccountValid){ 
-      $("#MyTimetable_hylink").attr("href","/phpProject/php/Timetable.php");
-      $("#MasterStaff_hylink").attr("href","/phpProject/php/MasterStaff.php");
-      $("#MasterUnit_hylink").attr("href","/phpProject/php/MasterUnits.php");
+      $("#MyTimetable_hylink").attr("href","../php/Timetable.php");
+      $("#MasterStaff_hylink").attr("href","../php/MasterStaff.php");
+      $("#MasterUnit_hylink").attr("href","../php/MasterUnits.php");
     }
     else
       alert("please log in your account!")    

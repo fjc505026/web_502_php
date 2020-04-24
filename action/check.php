@@ -1,5 +1,5 @@
 <?php
-	include ('db_conn.php');	
+	include ('../config/db_conn.php');	
 	//get the q parameter from URL
 	$StaffID=$_GET["id"];
 	//echo $StaffID;

@@ -85,8 +85,6 @@
             </div>
         </div>
 
-
-
         <!-- Modal for logout-->
         <div class="modal fade" id="logout_modal" tabindex="-1" role="dialog" aria-labelledby="logOutModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">

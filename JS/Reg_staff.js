@@ -18,11 +18,20 @@ function validateFunc() {
         var   Qualification =   $("#qualification").val();
         var   Expertise     =   $("#expertise").val();
        
-
-        $.post( "../JS/staffsubmit.php", { firstname: firstName, lastname:lastName, id:staffID,psd:Password,
-         phonenum:PhoneNo, email:Email,qual:Qualification, exper:Expertise} )
-        .done(function( data ) {
+        $.post(
+            "../action/Reg_acc_submit.php",
+            {firstname: firstName, 
+            lastname:lastName, 
+            id:staffID,
+            psd:Password,
+            phonenum:PhoneNo,
+            email:Email,
+            qual:Qualification,
+            exper:Expertise}
+            ).done(function( data ) {
             console.log(data);
+            alert("Account created!");
+           // window.location.href="../action/Reg_acc_submit.php";
         }); 
         }    
 }
@@ -30,7 +39,7 @@ function validateFunc() {
 $().ready(function() {
     $("#check").click( function () {
         var staffID = $("#staff_id").val();
-        $.get( "../JS/check.php", { id: staffID} )   //notice, path need to like this
+        $.get( "../action/check.php", { id: staffID} )   //notice, path need to like this
               .done(function( data ) {
               $("#output").html(data);
                console.log(data);
