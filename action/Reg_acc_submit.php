@@ -6,6 +6,13 @@
 	<body>
 		<?php
           include ('../config/db_conn.php');
+          
+          //  if(empty($_POST["firstName"]) || empty($_POST["lastName"]) || empty ($_POST["staffID"])
+          //  {
+          //       echo("it must contain username, password and valid email address");    
+          //  }
+          //  else
+          //  {
           $role=isset($_POST['role'])?$_POST['role']:' ';
           $firstName=htmlspecialchars($_POST["firstname"]);
           $lastName=htmlspecialchars($_POST["lastname"]);
@@ -23,8 +30,8 @@
           $currentTime=date("Y-m-d"); 
           $expiredTime= date("Y-m-d",strtotime('+1 year')); 
 
-
-          // $query = "SELECT `username` FROM `user`;"; //DOB
+          // need to check the duplicate of username
+          // $query = "SELECT `username` FROM `user`;"; //DOB  
           // $result = $mysqli->query($query);
           // $counter=
           // while ($row = $result->fetch_array(MYSQLI_ASSOC))
@@ -80,12 +87,6 @@
           }
           else if ($role=='staff'){
 
-          //  if(empty($_POST["firstName"]) || empty($_POST["lastName"]) || empty ($_POST["staffID"])
-          //  {
-          //       echo("it must contain username, password and valid email address");    
-          //  }
-          //  else
-          //  {
             $staffID=htmlspecialchars($_POST["id"]);
             $Qualification=htmlspecialchars($_POST["qual"]);
             $Expertise=htmlspecialchars($_POST["exper"]);

@@ -1,12 +1,13 @@
 
 
 
- <footer>
-     <div class="text-light">
-         @Copy right 2020 Jingchen fan
-     </div>
- </footer>  
+    <footer>
+        <div class="text-light">
+            @Copy right 2020 Jingchen fan
+        </div>
+    </footer>  
  </body>
+
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

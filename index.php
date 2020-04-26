@@ -8,7 +8,6 @@
 <!doctype html>
 <html lang="en">
     <?php  include('templates/header.php');?>
-
     <div class="jumbotron big-banner">
             <div>
                 <div class="col-sm-12">
@@ -68,12 +67,12 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form name="LogIn_form" action="index.php"  method="GET"  onsubmit="checkLoginValid()">
-                            <div name="LogIn_form" class="form-group">
-                                <label for="Email">Email address: </label>
-                                <input class="form-control" type="email" id="email0" value="demo@gmail.com" name="email" placeholder="Your Email address" required>
+                        <form name="LogIn_form"  method="POST" >
+                            <div class="form-group">
+                                <label for="Email">username: </label>
+                                <input class="form-control" type="text" id="username0" value="JFan" name="username" placeholder="Your username" required>
                                 <label for="psw1">Password: </label>
-                                <input class="form-control" type="password" id="psw0" value="Demo1234@" name="psw" placeholder="Your password" required><br>
+                                <input class="form-control" type="password" id="psw0" value="Fjc070910@" name="psw" placeholder="Your password" required><br>
                                 <div class="modal-footer">
                                     <button type="submit" id="SignIn_btn" class="btn btn-success" data-dismiss="modal">sign in</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
