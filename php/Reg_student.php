@@ -9,7 +9,7 @@
     <title>Registration</title>
 </head>
 <body class="jumbotron">
-    <form name="Register_form" onclick="validateFunc()" >
+    <form name="Register_form"  method="post" onclick="validateFunc()" >
         <div class="container">
             <div name="Register_form" class="form-group">
                 <fieldset>
@@ -29,7 +29,11 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <label for="student_id">Student ID: </label>
-                            <input class="form-control" type="text" name="student_id" id="student_id" placeholder="Student ID" >
+                            <div class="form-inline">
+                                <input class="form-control  col-sm-6" type="text" name="student_id" id="student_id" placeholder="Student ID" >
+                                <button class="btn btn-secondary col-sm-2 ml-2" id="check">Check</button>
+                                <label class="ml-2" id="output" for="student_id"></label>
+                            </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="phone_No">Phone number: </label>
@@ -75,17 +79,25 @@
                         <label for="inputState">State</label>
                         <select id="inputState" class="form-control">
                             <option selected>Choose...</option>
-                            <option>...</option>
+                            <option value="NSW">NSW</option>
+                            <option value="VIC">VIC</option>
+                            <option value="QLD">QLD</option>
+                            <option value="WA">WA</option>
+                            <option value="TAS">TAS</option>
+                            <option value="SA">SA</option>
+                            <option value="ACT">ACT</option>
+                            <option value="NT">NT</option>
+
                         </select>
                         </div>
                         <div class="form-group col-md-2">
-                        <label for="inputZip">Postcode</label>
-                        <input type="text" class="form-control" id="inputZip">
+                        <label for="inputPcode">Postcode</label>
+                        <input type="text" class="form-control" id="inputPcode">
                         </div>
                     </div>
                     <br>
                     <div class="text-center"> 
-                        I agree to the terms and conditions 
+                        I agree to the terms and conditions
                         <input type="checkbox" name="checkbox" value="check" id="agree"><br>
                         <br>
                         <div>
@@ -94,6 +106,7 @@
                         </div>
                     </div>
                 </fieldset>
+
             </div>
         </div>
     </form>
@@ -104,6 +117,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../JS/Reg_student.js"></script>
+<script type="text/javascript" src="../JS/reg_student.js"></script>
 </html>
-    

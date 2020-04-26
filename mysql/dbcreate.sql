@@ -24,7 +24,7 @@ CREATE TABLE `jfan6`.`student` (
     ) ENGINE = InnoDB;
 
 --staff table
-CREATE TABLE `jfan6`.`staff` ( 
+CREATE TABLE `jfan6`.`staff` (  
     `staff_id` INT(10) NOT NULL , 
     `expertise` VARCHAR(20) NOT NULL ,
     `qualification` VARCHAR(20) NOT NULL ,

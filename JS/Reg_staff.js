@@ -17,37 +17,57 @@ function validateFunc() {
         var   Email         =   $("#email").val();
         var   Qualification =   $("#qualification").val();
         var   Expertise     =   $("#expertise").val();
+        var   Address1      =   $("#inputAddress").val();  
+        var   Address2      =   $("#inputAddress2").val();  
+        var   city          =   $("#inputCity").val();
+        var   State          =  $("#inputState").val();
+        var   Pcode          =  $("#inputPcode").val();
        
         $.post(
             "../action/Reg_acc_submit.php",
-            {firstname: firstName, 
+            {role:'staff',
+            firstname: firstName, 
             lastname:lastName, 
             id:staffID,
             psd:Password,
             phonenum:PhoneNo,
             email:Email,
             qual:Qualification,
-            exper:Expertise}
+            exper:Expertise,
+            Adr1:Address1,
+            Adr2:Address2,
+            city:city,
+            State:State,
+            Pcode:Pcode}
             ).done(function( data ) {
             console.log(data);
             alert("Account created!");
            // window.location.href="../action/Reg_acc_submit.php";
         }); 
-        }    
+    }    
 }
 
 $().ready(function() {
-    $("#check").click( function () {
+    
+    $("#check").click(function () {
         var staffID = $("#staff_id").val();
-        $.get( "../action/check.php", { id: staffID} )   //notice, path need to like this
-              .done(function( data ) {
-              $("#output").html(data);
-               console.log(data);
-          });   
-          
-      });
+        if  (!staffID)
+        {
+            alert("Please type in 8 digtial id");
+        }
+        else
+        {
+            $.get( "../action/check.php", 
+                    { role:'staff',
+                        id: staffID} 
+                ).done(function( data ) {
+                $("#output").html(data);
+                console.log(data);
+                });   
+        }  
+    });
        
-      $('button[type!=submit]').click(function(){
+    $('button[type!=submit]').click(function(){
         return false;
     });	
 

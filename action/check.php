@@ -1,14 +1,30 @@
 <?php
 	include ('../config/db_conn.php');	
-	//get the q parameter from URL
-	$StaffID=$_GET["id"];
-	//echo $StaffID;
-	$result=$mysqli->query("SELECT `StaffID` FROM `staffaccnt` WHERE `StaffID` = $StaffID;");
-    $result_cnt = $result->num_rows;
-	if ($result_cnt!=0) {
-		echo "<p class=\"text-danger\">ID exists</p>";
-	} else {
-		echo "<p>ID available</p>";		
-	}
+	$role=isset($_GET['role'])?$_GET['role']:' ';
+	$ID=isset($_GET['id'])?$_GET['id']:' ';
 
+	if($role=='student'){
+		$result=$mysqli->query("SELECT `student_id` FROM `student` WHERE `student_id` = $ID;");
+		$result_cnt = $result->num_rows;
+	
+		$result_cnt = $result->num_rows;
+		if ($result_cnt!=0) {
+			echo "<p class=\"text-danger\">ID exists</p>";
+		} else {
+			echo "<p>ID available</p>";		
+		}
+	}
+	else if ($role=='staff'){
+		//echo $StaffID;
+		$result=$mysqli->query("SELECT `staff_id` FROM `staff` WHERE `staff_id` = $ID;");
+		$result_cnt = $result->num_rows;
+		if ($result_cnt!=0) {
+			echo "<p class=\"text-danger\">ID exists</p>";
+		} else {
+			echo "<p>ID available</p>";		
+		}
+	}
+	$result->free();
+	$mysqli->close();
+	
 ?> 

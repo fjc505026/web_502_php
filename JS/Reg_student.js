@@ -8,12 +8,70 @@ function validateFunc() {
     if(Bool_submit){
         alert("The form was submitted");
         Bool_submit=false;
+        var   firstName     =   $("#first_name").val();
+        var   lastName      =   $("#last_name").val();
+        var   studentID     =   $("#student_id").val();
+        var   DOB           =   $("#DOB").val();
+        var   Password      =   $("#psw2").val();
+        var   PhoneNo       =   $("#phone_No").val();
+        var   Email         =   $("#email").val();
+        var   Address1      =   $("#inputAddress").val();  
+        var   Address2      =   $("#inputAddress2").val();  
+        var   city          =   $("#inputCity").val();
+        var   State          =  $("#inputState").val();
+        var   Pcode          =  $("#inputPcode").val();
+
+       
+        $.post(
+            "../action/Reg_acc_submit.php",
+           {role:'student',
+            firstname: firstName, 
+            lastname:lastName, 
+            id:studentID,
+            DOB:DOB,
+            psd:Password,
+            phonenum:PhoneNo,
+            email:Email,
+            Adr1:Address1,
+            Adr2:Address2,
+            city:city,
+            State:State,
+            Pcode:Pcode}
+            ).done(function( data ) {
+            console.log(data);
+            alert("Account created!");
+        }); 
     }    
 }
 
 $().ready(function() {
+
+    $("#check").click(function () {
+        
+        var studentID = $("#student_id").val();
+        if  (!studentID)
+        {
+         alert("Please type in 6 digtial id");
+        }
+        else
+        {
+            $.get( "../action/check.php", 
+                   {role:'student',
+                    id: studentID} 
+                ).done(function( data ) {
+                $("#output").html(data);
+                console.log(data);
+                });   
+        }  
+    });
+       
+    $('button[type!=submit]').click(function(){
+        return false;
+    });	
+
+
+
     $("#submit_btn").click(function(){
-      
         if((!$("#first_name").val())&&((!$("#last_name").val())))
             alert("please enter your username");
         else if(!RegExpID.test($("#student_id").val()))
