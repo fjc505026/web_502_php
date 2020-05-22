@@ -1,67 +1,54 @@
-<?php 
-
-
+<?php
+session_start();
+include('../config/db_conn.php'); //db connection
+$query = "SELECT `id` ,`unit_code`,`unit_name`,`lecturer`,`semester` FROM `units`;";
+$result = $mysqli->query($query);
 ?>
 
 <!doctype html>
-<head> <link rel="stylesheet" href="../format/Timetable.css"></head>
+<head> <link rel="stylesheet" href="../format/UnitDetail.css"></head>
 <html lang="en">
-    <?php  include('../templates/header.php');?>
+    <?php  include('head.php');?>
+  <!-- UnitDetail table  -->
+  <div class="container" id="Unit_ct">
+    <h2 class="text-muted">Unit Details</h2>
+    <table class="table table-hover bg-secondary" id="Unit_tb">
+      <thead>
+        <tr>
+          <th>Unit code</th>
+          <th>Unit name</th>
+          <th>Unit coordinator</th>
+          <th>lecturer</th>
+          <th>Available semester and campus</th>
+        </tr>
+      </thead>
 
+      <tbody id="Unit_body">
 
-    <!-- UnitDetail table  -->
-    <div class="container" id="Unit_ct">
-        <h2 class="text-muted">Unit Details</h2>          
-        <table class="table table-hover bg-secondary" id="Unit_tb">
-          <thead>
-            <tr>
-              <th>Unit code</th>
-              <th>Unit coordinator</th>
-              <th>lecturer</th>
-              <th>Description</th>
-              <th>Available semester and campus</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>KIT001</td>
-              <td>Doe</td>
-              <td>john,harry</td>
-              <th>Description pattern Description pattern Description pattern </th>
-              <th> <a class="text-dark" href="UnitEnrollment.html">Pandora(S1),Rivendell(Winter School),Neverland(S2)</a></th>
-            </tr>
-            <tr>
-              <td>KIT002</td>
-              <td>Moe</td>
-              <td>mary,pattern</td>
-              <th>Description pattern Description pattern Description pattern </th>
-              <th><a class="text-dark" href="UnitEnrollment.html">Pandora(S1),Rivendell(Winter School),Neverland(S2)</a></th>
-            </tr>
-            <tr>
-              <td>KIT003</td>
-              <td>Dooley</td>
-              <td>pattern,pattern</td>
-              <th>Description pattern Description pattern Description pattern </th>
-              <th><a class="text-dark" href="UnitEnrollment.html">Pandora(S1),Rivendell(Winter School),Neverland(S2)</a></th>
-            </tr>
-            <tr>
-                <td>KIT003</td>
-                <td>Dooley</td>
-                <td>pattern,pattern</td>
-                <th>Description pattern Description pattern Description pattern </th>
-                <th><a class="text-dark" href="UnitEnrollment.html">Pandora(S1),Rivendell(Winter School),Neverland(S2)</a></th>
-            </tr>
-            <tr>
-            <td>KIT003</td>
-            <td>Dooley</td>
-            <td>pattern,pattern</td>
-            <th>Description pattern Description pattern Description pattern </th>
-            <th><a class="text-dark" href="UnitEnrollment.html">Pandora(S1),Rivendell(Winter School),Neverland(S2)</a></th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      </tbody>
+    </table>
+  </div>
 
-      <?php  include('../templates/footer.php');?>
+  <?php  include('foot.php');?>
+  <script type="text/javascript" src="../JS/#.js"></script>
 </html>
 
+<script>
+function showData(){           //ajax request
+        $.ajax({
+            url: '../action/UnitDetailData.php',
+            method:'GET'
+        }).done(function(data) {
+            $('#Unit_body').html(data);
+            $(".brief-view").click(function(){
+              if($(this).next().is(":hidden")) {
+                  $(this).next().show();
+                  $(this).next().next().show();}
+              else {
+                  $(this).next().hide();
+                  $(this).next().next().hide();}
+            });
+        })
+    };
+
+</script>

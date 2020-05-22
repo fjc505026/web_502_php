@@ -1,3 +1,16 @@
+<?php
+//include the file session.php
+include("session.php");
+
+//if there is any received error message
+if(isset($_GET['error']))
+{
+	$errormessage=$_GET['error'];
+	//show error message using javascript alert
+	echo "<script>alert('$errormessage');</script>";
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,35 +22,35 @@
     <title>Registration</title>
 </head>
 <body class="jumbotron">
-    <form name="Register_form"  method="post" onclick="validateFunc()" >
+    <form name="Register_form" id="Register_form" method="post" action="../action/Reg_acc_submit.php" >
         <div class="container">
-            <div name="Register_form" class="form-group">
+            <div  class="form-group">
                 <fieldset>
                     <h3><a href="../index.php"><i class="fas fa-home text-dark"></i></a></h3>
-                    <h1></i>Create an new account</h1><br> 
+                    <h1></i>Create an new account</h1><br>
                     <div class="row">
                         <div class="col-sm-6">
                             <label for="first_name">First Name: </label>
-                            <input class="form-control" type="text" name="first_name" id="first_name" placeholder="First Name..." >
+                            <input class="form-control" type="text" name="firstname" id="first_name"  placeholder="First Name..." >
                         </div>
                         <div class="col-sm-6">
                             <label for="last_name">Last Name: </label>
-                            <input class="form-control" type="text" name="last_name" id="last_name" placeholder="Last Name..." >
+                            <input class="form-control" type="text" name="lastname" id="last_name"  placeholder="Last Name..." >
                         </div>
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-sm-6">
-                            <label for="student_id">Student ID: </label>
+                            <label for="studentID">Student ID: </label>
                             <div class="form-inline">
-                                <input class="form-control  col-sm-6" type="text" name="student_id" id="student_id" placeholder="Student ID" >
-                                <button class="btn btn-secondary col-sm-2 ml-2" id="check">Check</button>
-                                <label class="ml-2" id="output" for="student_id"></label>
+                                <input class="form-control  col-sm-6" type="text" name="studentID" id="student_id"  placeholder="Student ID" >
+                                <input type="button" class="btn-secondary col-sm-2 ml-2" value ="Check" id="check"></input>
+                                <label class="ml-2" id="output" for="studentID"></label>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="phone_No">Phone number: </label>
-                            <input class="form-control" type="text" name="phone_No" id="phone_No" placeholder="Phone number...">
+                            <input class="form-control" type="text" name="phonenum" id="phone_No"  placeholder="Phone number...">
                         </div>
                     </div>
                     <br>
@@ -54,30 +67,30 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <label for="psw1">Password: </label>
-                            <input class="form-control" type="password" id="psw1" name="psw" placeholder="Your password" >
+                            <input class="form-control" type="password"  id="psw1" name="psw1" placeholder="Your password" >
 
                         </div>
                         <div class="col-sm-6">
                             <label for="psw2">Comfirm Password: </label>
-                            <input class="form-control" type="password" id="psw2" name="psw" placeholder="Your password" >
+                            <input class="form-control" type="password" id="psw2" name="psw2" placeholder="Your password" >
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputAddress">Address</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                        <input type="text" class="form-control" id="inputAddress" name="Adr1" placeholder="1234 Main St">
                     </div>
                     <div class="form-group">
                         <label for="inputAddress2">Address 2</label>
-                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                        <input type="text" class="form-control" id="inputAddress2"  name="Adr2" placeholder="Apartment, studio, or floor">
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                         <label for="inputCity">City</label>
-                        <input type="text" class="form-control" id="inputCity">
+                        <input type="text" class="form-control" name="city" id="inputCity">
                         </div>
                         <div class="form-group col-md-4">
                         <label for="inputState">State</label>
-                        <select id="inputState" class="form-control">
+                        <select id="inputState" name="State" class="form-control">
                             <option selected>Choose...</option>
                             <option value="NSW">NSW</option>
                             <option value="VIC">VIC</option>
@@ -87,21 +100,20 @@
                             <option value="SA">SA</option>
                             <option value="ACT">ACT</option>
                             <option value="NT">NT</option>
-
                         </select>
                         </div>
                         <div class="form-group col-md-2">
                         <label for="inputPcode">Postcode</label>
-                        <input type="text" class="form-control" id="inputPcode">
+                        <input type="text" class="form-control" id="inputPcode" name="Pcode">
                         </div>
                     </div>
                     <br>
-                    <div class="text-center"> 
+                    <div class="text-center">
                         I agree to the terms and conditions
                         <input type="checkbox" name="checkbox" value="check" id="agree"><br>
                         <br>
                         <div>
-                            <button type="submit" class="btn btn-primary" id="submit_btn" >Submit</button>
+                            <input type="button" value="Submit" class="btn btn-primary" id="submit_btn"></input>
                             <a type="button" class="btn btn-danger" href="../index.php"> Close</a>
                         </div>
                     </div>
@@ -110,7 +122,7 @@
             </div>
         </div>
     </form>
-</body> 
+</body>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

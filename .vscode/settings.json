@@ -1,0 +1,5 @@
+{
+    "remove-empty-lines.inDocument": true,
+    "remove-empty-lines.inSelection": true,
+    "remove-empty-lines.allowedNumberOfEmptyLines": 1
+}

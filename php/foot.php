@@ -1,5 +1,6 @@
- <!-- Modal for Register-->
-    <div class="modal fade" id="roleSelect" tabindex="-1" role="dialog" aria-labelledby="logInModalLabel" aria-hidden="true">
+
+        <!-- Modal for Register-->
+        <div class="modal fade" id="roleSelect" tabindex="-1" role="dialog" aria-labelledby="logInModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
@@ -67,6 +68,7 @@
                             </div>
                         </form>
                     </div>
+                </div>
             </div>
         </div>
 
@@ -80,20 +82,20 @@
  </body>
 
 
-
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="./JS/mainpage.js"></script>
+<script type="text/javascript" src="../JS/subpage.js"></script>
 
 <?php
     if(isset($_SESSION['name'])){
         //echo "<script>alert('".$_SESSION['session_user']."');</script>" ;
         //echo "<script>alert('".$_SESSION['name']."');</script>" ;
         echo "<script>$('#Logged_banner').html('Hello(".$_SESSION['name'].")');</script>" ;
-        $access= $_SESSION['access'];
+        //$access= $_SESSION['access'];
         echo "<script>$('.afterlog').show();$('.beforelog').hide(); AccountValid=true;</script>" ;
-        echo "<script>var Accesslevel=". $access.";</script>" ;
+        echo "<script>var Accesslevel=".$_SESSION['access'].";</script>" ;
+       // echo "<script>alert(".$_SESSION['access'].");</script>" ;
     }
 ?>

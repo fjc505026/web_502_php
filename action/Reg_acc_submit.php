@@ -6,125 +6,112 @@
 	<body>
 		<?php
           include ('../config/db_conn.php');
-          
-          //  if(empty($_POST["firstName"]) || empty($_POST["lastName"]) || empty ($_POST["staffID"])
-          //  {
-          //       echo("it must contain username, password and valid email address");    
-          //  }
-          //  else
-          //  {
-          $role=isset($_POST['role'])?$_POST['role']:' ';
-          $firstName=htmlspecialchars($_POST["firstname"]);
-          $lastName=htmlspecialchars($_POST["lastname"]);
-       
-          $Password=htmlspecialchars($_POST["psd"]);
-          $hashpassword = password_hash($password, PASSWORD_DEFAULT);
-          $Mobile=htmlspecialchars($_POST["phonenum"]);
-          $Email=htmlspecialchars($_POST["email"]);
-          $Address1=htmlspecialchars($_POST["Adr1"]);
-          $Address2=htmlspecialchars($_POST["Adr2"]);
-          $city=htmlspecialchars($_POST["city"]);
-          $State=htmlspecialchars($_POST["State"]);
-          $Pcode=htmlspecialchars($_POST["Pcode"]);
-          $Username=substr($firstName, 0, 1 ).$lastName;
-          $currentTime=date("Y-m-d"); 
-          $expiredTime= date("Y-m-d",strtotime('+1 year')); 
+          session_start();
 
-          // need to check the duplicate of username
-          // $query = "SELECT `username` FROM `user`;"; //DOB  
-          // $result = $mysqli->query($query);
-          // $counter=
-          // while ($row = $result->fetch_array(MYSQLI_ASSOC))
-          // { 
-          //   if($row['username']== $Username)
-          //   $Username
-          // }
+          $_POST["firstname"]=isset($_POST["firstname"])?$_POST["firstname"]:' ';
+          $_POST["lastname"]=isset($_POST["lastname"])?$_POST["lastname"]:' ';
+          $_POST["psw1"]=isset($_POST["psw1"])?$_POST["psw1"]:' ';
+          $_POST["phonenum"]=isset($_POST["phonenum"])?$_POST["phonenum"]:' ';
+          $_POST["email"]=isset($_POST["email"])?$_POST["email"]:' ';
+          $_POST["Adr1"]=isset($_POST["Adr1"])?$_POST["Adr1"]:' ';
+          $_POST["Adr2"]=isset($_POST["Adr2"])?$_POST["Adr2"]:' ';
+          $_POST["city"]=isset($_POST["city"])?$_POST["city"]:' ';
+          $_POST["State"]=isset($_POST["State"])?$_POST["State"]:' ';
+          $_POST["Pcode"]=isset($_POST["Pcode"])?$_POST["Pcode"]:' ';
 
-          $query = "SELECT MAX(`address_id`) AS max_id FROM `address`;"; 
-          echo  $query;
-          $result = $mysqli->query($query);
-          while ($row =$result->fetch_array(MYSQLI_ASSOC))
-          {$address_id=$row['max_id']+1;}
-          //$address_id=3;
-          $query = "INSERT INTO `address` (`address_id`,`address_detail1`,`address_detail2`, `city`, `state`,`country`,`postcode`)
-          VALUES ($address_id,'$Address1', '$Address2', '$city','$State','Austrlia', $Pcode);"; 
-          $result = $mysqli->query($query);
-  
-          if($role=='student'){
-            $studentID=htmlspecialchars($_POST["id"]);
-            $DOB=htmlspecialchars($_POST["DOB"]);
-  
-            $query = "INSERT INTO `user` (`username`,`fname`, `lname`, `student_id`,`password`,`phonenum`,`email`,`DOB`,`address_id`)
-            VALUES ('$Username','$firstName', '$lastName', '$studentID','$hashpassword','$Mobile','$Email', '$DOB',1);"; //DOB
-            echo  $query;
-            $result = $mysqli->query($query);
 
-            $query="SELECT * FROM  `user` WHERE `student_id`= $studentID ;";
-            //echo  $query;
-            $result = $mysqli->query($query);
-            while ($row = $result->fetch_array(MYSQLI_ASSOC))
-            { echo "Full name:".$row['fname'].$row['lname']."<br>";
-              echo "Student ID:".$row['student_id']."<br>";
-              echo "Password:".$row['password']."<br>";
-              echo "phone Number:".$row['phonenum']."<br>";
-              echo "Email:".$row['email']."<br>";
-            }
-             
-            $query = "INSERT INTO `student` (`student_id`,`start_date`,`expire_date`)
-                      VALUES ('$studentID',' $currentTime','$expiredTime');";  
-            $result = $mysqli->query($query);
-            $result->free();
-
-            $query="SELECT * FROM  `student` WHERE `student_id`=$studentID ;";
-            $result = $mysqli->query($query);
-            while ($row = $result->fetch_array(MYSQLI_ASSOC))
-            { echo "start_date:".$row['start_date']."<br>";
-              echo "expire_date:".$row['expire_date']."<br>";
-            }
-            $result->free();
-            $mysqli->close();
-
+          if(isset($_POST["studentID"])){
+            $role="student";
+            $ID=$mysqli->real_escape_string(strip_tags(substr($_POST["studentID"],0,10)));
           }
-          else if ($role=='staff'){
+          else if(isset($_POST["staffID"])){
+            $role="staff";
+            $ID=$mysqli->real_escape_string(strip_tags(substr($_POST["staffID"],0,10)));
+          }
+          //echo  $role;
+          //echo   $ID;
+          $firstName=$mysqli->real_escape_string(strip_tags(substr($_POST["firstname"],0,50)));
+          $lastName=$mysqli->real_escape_string(strip_tags(substr($_POST["lastname"],0,50)));
+          $Password=$mysqli->real_escape_string(strip_tags(substr($_POST["psw1"],0,20)));
 
-            $staffID=htmlspecialchars($_POST["id"]);
-            $Qualification=htmlspecialchars($_POST["qual"]);
-            $Expertise=htmlspecialchars($_POST["exper"]);
-                 
-            $query = "INSERT INTO `user` (`username`,`fname`, `lname`, `staff_id`,`password`,`phonenum`,`email`,`address_id`)
-                       VALUES ('$Username','$firstName', '$lastName', '$staffID','$hashpassword','$Mobile','$Email', $address_id);"; 
+          $hashpassword=crypt($Password,'$2y$07$SuperSecretSaltIsSexy$');
+
+          $Mobile=$mysqli->real_escape_string(strip_tags(substr($_POST["phonenum"],0,15)));
+          $Email=$mysqli->real_escape_string(strip_tags(substr($_POST["email"],0,50)));
+          $Address1=$mysqli->real_escape_string(strip_tags(substr($_POST["Adr1"],0,50)));
+          $Address2=$mysqli->real_escape_string(strip_tags(substr($_POST["Adr2"],0,50)));
+          $city=$mysqli->real_escape_string(strip_tags(substr($_POST["city"],0,20)));
+          $State=$mysqli->real_escape_string(strip_tags(substr($_POST["State"],0,20)));
+          $Pcode=$mysqli->real_escape_string(strip_tags(substr($_POST["Pcode"],0,10)));
+          $Username=strtolower(substr($firstName, 0, 1 ).$lastName).$ID;
+          $currentTime=date("Y-m-d");
+          $expiredTime= date("Y-m-d",strtotime('+1 year'));
+
+          //check whether the username existed!
+          $query="SELECT `username` FROM `user`WHERE `username`='$Username';";
+          $result = $mysqli->query($query);
+          $row = $result->fetch_array(MYSQLI_ASSOC);
+          // echo "row".$row['username'];
+          //echo "username".$Username;
+
+          if ($Username ==$row['username']){     //handle the username existed
+            if($role=="student")
+              header('Location:../php/Reg_student.php?error=UsernameExisted!');
+            else if($role=="staff")
+              header('Location:../php/Reg_staff.php?error=UsernameExisted!');
+          }
+          else
+          {
+            $result->free();
+            // get max address_id and insert address info.
+            $query = "SELECT MAX(`address_id`) AS max_id FROM `address`;";
             //echo  $query;
             $result = $mysqli->query($query);
-
-            $query="SELECT * FROM  `user` WHERE `staff_id`= $staffID ;";
-            //echo  $query;
+            while ($row =$result->fetch_array(MYSQLI_ASSOC))
+            {$address_id=$row['max_id']+1;}
+            $query = "INSERT INTO `address` (`address_id`,`address_detail1`,`address_detail2`, `city`, `state`,`country`,`postcode`)
+            VALUES ($address_id,'$Address1', '$Address2', '$city','$State','Australia', '$Pcode');";
             $result = $mysqli->query($query);
-            while ($row = $result->fetch_array(MYSQLI_ASSOC))
-            { echo "Full name:".$row['fname'].$row['lname']."<br>";
-              echo "Staff ID:".$row['staff_id']."<br>";
-              echo "Password:".$row['password']."<br>";
-              echo "phone Number:".$row['phonenum']."<br>";
-              echo "Email:".$row['email']."<br>";
+
+            if($role=='student'){
+              //$studentID=$mysqli->real_escape_string($_POST["id"]);
+              $DOB=$mysqli->real_escape_string(strip_tags(substr($_POST["DOB"],0,15)));
+
+              // insert user table
+              $query = "INSERT INTO `user` (`username`,`fname`, `lname`, `student_id`,`password`,`phonenum`,`email`,`DOB`,`address_id`,`access`) VALUES ('$Username','$firstName', '$lastName', '$ID','$hashpassword','$Mobile','$Email', '$DOB', $address_id,1);"; //DOB
+              //echo  $query;
+              $result = $mysqli->query($query);
+
+              //insert student table
+              $query = "INSERT INTO `student` (`student_id`,`start_date`,`expire_date`) VALUES ('$ID','$currentTime','$expiredTime');";
+              echo  $query;
+              $result = $mysqli->query($query);
+
+
+              $_SESSION['session_user']=$Username;
+              header('Location:./register_success.php?psd='.$Password);
+
             }
+            else if ($role=='staff'){
+              $Qualification=$mysqli->real_escape_string($_POST["qual"]);
+              $Expertise=$mysqli->real_escape_string($_POST["exper"]);
+              // insert user table
+              $query = "INSERT INTO `user` (`username`,`fname`, `lname`, `staff_id`,`password`,`phonenum`,`email`,`address_id`,`access`)
+                        VALUES ('$Username','$firstName', '$lastName', '$ID','$hashpassword','$Mobile','$Email', $address_id,2);";
+              //echo  $query;
+              $result = $mysqli->query($query);
 
-            $query = "INSERT INTO `staff` (`staff_id`,`role`,`expertise`,`qualification`)
-                      VALUES ('$staffID','staff','$Expertise', '$Qualification');";  
-               
-            
-            $result = $mysqli->query($query);
-            $result->free();
-      
-            $query="SELECT * FROM  `staff` WHERE `staff_id`=$staffID ;";
-            $result = $mysqli->query($query);
-            while ($row = $result->fetch_array(MYSQLI_ASSOC))
-            { echo "expertise:".$row['expertise']."<br>";
-              echo "qualification:".$row['qualification']."<br>";
+              // insert staff table
+              $query = "INSERT INTO `staff` (`staff_id`,`role`,`expertise`,`qualification`)
+                        VALUES ('$ID','staff','$Expertise', '$Qualification');";
+              $result = $mysqli->query($query);
+
+              $_SESSION['session_user']=$Username;
+              header('Location:./register_success.php?psd='.$Password);
+
             }
-        
-            $result->free();
-            $mysqli->close();
-
-         }
+          }
+          $mysqli->close();
 		?>
 	</body>
 </html>

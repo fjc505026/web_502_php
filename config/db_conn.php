@@ -1,6 +1,6 @@
 <?php
 
-define('DB_server','myDB');  //myDB
+define('DB_server','Utas');  //myDB
 
 if (DB_server=='myDB'){
 	define('DB_servername','localhost');

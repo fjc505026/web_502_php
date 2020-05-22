@@ -40,6 +40,10 @@
    display:none;
 }
 
+.beforelog{
+  display:block;
+}
+
 #Uni_name{
     font-size: 80px;
     color: rgb(141, 141, 141);

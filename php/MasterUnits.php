@@ -1,66 +1,91 @@
-<?php 
-
-
+<?php
+session_start();
+include('../config/db_conn.php'); //db connection
+$query = "SELECT `id` ,`unit_code`,`unit_name`,`lecturer`,`semester` FROM `units`;";
+$result = $mysqli->query($query);
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <head> <link rel="stylesheet" href="../format/#.css"></head>
 <html lang="en">
-    <?php  include('../templates/header.php');?>
+    <?php  include('head.php');?>
     <br><br>
 
     <!-- UnitDetail table  -->
-    <div class="container" id="Unit_ct">
-        <h2 class="text-muted">Unit Details</h2>          
-        <table class="table table-hover bg-secondary" id="Unit_tb">
-          <thead>
-            <tr>
-              <th>Unit code</th>
-              <th>Unit coordinator</th>
-              <th>lecturer</th>
-              <th>Description</th>
-              <th>Available semester and campus</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>KIT001</td>
-              <td>Doe</td>
-              <td>john,harry</td>
-              <th>Description pattern Description pattern Description pattern </th>
-              <th> <a class="text-dark" href="UnitEnrollment.php">Pandora(S1),Rivendell(Winter School),Neverland(S2)</a></th>
-            </tr>
-            <tr>
-              <td>KIT002</td>
-              <td>Moe</td>
-              <td>mary,pattern</td>
-              <th>Description pattern Description pattern Description pattern </th>
-              <th><a class="text-dark" href="UnitEnrollment.php">Pandora(S1),Rivendell(Winter School),Neverland(S2)</a></th>
-            </tr>
-            <tr>
-              <td>KIT003</td>
-              <td>Dooley</td>
-              <td>pattern,pattern</td>
-              <th>Description pattern Description pattern Description pattern </th>
-              <th><a class="text-dark" href="UnitEnrollment.php">Pandora(S1),Rivendell(Winter School),Neverland(S2)</a></th>
-            </tr>
-            <tr>
-                <td>KIT003</td>
-                <td>Dooley</td>
-                <td>pattern,pattern</td>
-                <th>Description pattern Description pattern Description pattern </th>
-                <th><a class="text-dark" href="UnitEnrollment.php">Pandora(S1),Rivendell(Winter School),Neverland(S2)</a></th>
-            </tr>
-            <tr>
-            <td>KIT003</td>
-            <td>Dooley</td>
-            <td>pattern,pattern</td>
-            <th>Description pattern Description pattern Description pattern </th>
-            <th><a class="text-dark" href="UnitEnrollment.php">Pandora(S1),Rivendell(Winter School),Neverland(S2)</a></th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class ="container">
+        <h2 align ="center">Unit details</h2>
+        <!-- <a href="tute7_main.php"> Back to Main</a> -->
+        <button class="btn btn-dark float-right"  data-toggle="modal" data-target="#search_modal">Search</button>
 
-<?php  include('../templates/footer.php');?>
+        <table class="table table-striped table-hover" id="Unit_tb">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Unit Code</th>
+                    <th>Unit Name</th>
+                    <th>Unit Coordinator</th>
+                    <th>Semester</th>
+                </tr>
+            </thead>
+            <tbody> </tbody>
+        </table>
+        <button class="btn btn-primary float-right" id="mange_btn" onClick="'">Manage Unit Details</button>
+    </div>
+<?php include('../action/searchModal.php'); ?>
+<?php  include('foot.php');?>
 </html>
+<script>
+    function showData(){           //ajax request
+        $.ajax({
+            url: '../action/process.php?a=view',
+            method:'GET'
+        }).done(function(data) {
+            $('tbody').html(data);
+        })
+    };
+
+    //Modal dialog Return key to exec search function
+    function returnKeySearch(){
+        if (event.keyCode==13)
+        $("#Search_btn").click();
+    }
+
+    $("#mange_btn").click(function(){
+        if(Accesslevel<2)
+        alert("you do not have the access right");
+        if(Accesslevel>=2)
+        window.location.href="./MasterUnits_manage.php";
+    });
+
+    // search button to call Process.php
+    $("#Search_btn").click(function(){
+        $var1= $("#searchVal").val();
+        if(!$var1){
+            alert("please input search content!");
+            return false;
+        }
+        else{
+        $str="../action/process.php?a=search&s="+$var1;       //added by adding variable at the end of url
+        $.ajax({
+                url: $str,
+                method:'GET'
+                //,data:$var1,       //add by ajax type
+                // dataType:"html"
+                //success:function(output){if (output!="No"){$('#showContent').html(data);} else {alert {"No result!"}}}
+            }).done(function(data) {
+                console.log(data);
+                $('#searchBar').hide();
+                $('#showContent').html(data);
+            })
+        }
+    })
+
+    // close button to initalise search bar interface
+    $(".modalClose").click(function (){
+        $('#showContent').html("");
+            $('#searchBar').show();
+
+    })
+</script>
+
+
