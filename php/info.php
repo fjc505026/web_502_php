@@ -133,6 +133,10 @@ if($row =$result->fetch_array(MYSQLI_ASSOC)){
                         $exp=$row['expertise'];
                         $qual=$row['qualification'];
                         $discName=$row['disc_name'];
+                        $avaDay=$row['ava_day'];
+                        $avaStart=$row['ava_start_time'];
+                        $avaEnd=$row['ava_end_time'];
+
                     }
                 ?>
                 <div  class="row">
@@ -156,6 +160,24 @@ if($row =$result->fetch_array(MYSQLI_ASSOC)){
                     <div class="col-sm-5 ">
                             <label    for="discName"><b>Discipline Name: </b> </label>
                             <p><?php echo  $discName;?></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2 ">
+                      <label for="">Available hours:</label>
+                    </div>
+                    <div class="col-sm-2 ">
+                      <input readonly class="form-control avaDate" type="text" name="avaDay" id="avaDay" value="<?php echo  $avaDay;?>" >
+                    </div>
+                    <div class="col-sm-3">
+                        <input readonly class="form-control avaDate" type="text" name="avaStart" id="avaStart" value="<?php echo  $avaStart;?>" >
+                    </div>
+                    <div class="col-sm-3">
+                        <input readonly class="form-control avaDate" type="text" name="avaEnd" id="avaEnd" value="<?php echo  $avaEnd;?>" >
+                    </div>
+                    <div class="col-sm-2 ">
+                        <button class="btn btn-outline-secondary  ml-2" id="ava_modify" value="">Modify</button>
                     </div>
                 </div>
                 <?php
@@ -232,7 +254,7 @@ if($row =$result->fetch_array(MYSQLI_ASSOC)){
                     <tr>
                         <td><?php echo  $row['type'];?></td>
                         <td><?php echo  $row['unit_code'];?></td>
-                        <td><?php echo $row['day'].'('.$row['start_time'].'-'.$row['end_time'].')';?></td>
+                        <td><?php echo  $row['day'].'('.$row['start_time'].'-'.$row['end_time'].')';?></td>
                         <td><?php echo  $row['campus'].'('.$row['room_name'].')';?></td>
                     </tr>
                     <?php
@@ -304,8 +326,6 @@ $('#psd_Change_Cfm_btn').click(function(){
         $("#passwordChange_form").submit();
         header("location: ../action/psdChange.php");
     }
-
-
 })
 
 //modify DOB
@@ -419,5 +439,30 @@ $('#phone_modify').click(function(){
         })
     }
 })
+
+//modify avaHours
+bool_avaHours=false;
+$('#ava_modify').click(function(){
+    if(bool_avaHours==false){
+        $('.avaDate').prop("readonly",false);
+        bool_avaHours=true;
+        $('#ava_modify').html('Confirm');
+    }else if (bool_avaHours==true){
+        bool_avaHours=false;
+        $('#ava_modify').html('Modify');
+        $('.avaDate').prop("readonly",true);
+
+        $.ajax({
+            url:'../action/infoChange.php?a=ahour&day='+$('#avaDay').val()+'&start='+$('#avaStart').val()+'&end='+$('#avaEnd').val(),
+            method:'GET'
+        }).done(function(data) {
+            console.log(data);
+            location.reload();
+        })
+    }
+})
+
+
+
 
 </script>

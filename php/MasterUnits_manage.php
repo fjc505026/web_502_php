@@ -12,7 +12,7 @@ $result = $mysqli->query($query);
     <br><br>
 
     <div class ="container">
-        <h2 align ="center">Manage Unit details</h2>
+        <h2 align ="center">Manage Unit Master list</h2>
         <button class="btn btn-dark float-right"  data-toggle="modal" data-target="#search_modal">Search</button>
         <table class="table table-bordered table-striped" id="tabledit">
             <thead>

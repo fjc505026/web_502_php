@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('../config/db_conn.php'); //db connection
+//request all units info
 $query = "SELECT `id` ,`unit_code`,`unit_name`,`lecturer`,`semester` FROM `units`;";
 $result = $mysqli->query($query);
 ?>
@@ -40,6 +41,7 @@ function showData(){           //ajax request
             method:'GET'
         }).done(function(data) {
             $('#Unit_body').html(data);
+            // when click the unit row, show the detail view
             $(".brief-view").click(function(){
               if($(this).next().is(":hidden")) {
                   $(this).next().show();

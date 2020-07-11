@@ -7,7 +7,7 @@
 		<?php
           include ('../config/db_conn.php');
           session_start();
-
+          // if variable is null , set to none
           $_POST["firstname"]=isset($_POST["firstname"])?$_POST["firstname"]:' ';
           $_POST["lastname"]=isset($_POST["lastname"])?$_POST["lastname"]:' ';
           $_POST["psw1"]=isset($_POST["psw1"])?$_POST["psw1"]:' ';
@@ -30,6 +30,7 @@
           }
           //echo  $role;
           //echo   $ID;
+          //truncate the user input if too long, escape special charactor for safety purpose.
           $firstName=$mysqli->real_escape_string(strip_tags(substr($_POST["firstname"],0,50)));
           $lastName=$mysqli->real_escape_string(strip_tags(substr($_POST["lastname"],0,50)));
           $Password=$mysqli->real_escape_string(strip_tags(substr($_POST["psw1"],0,20)));

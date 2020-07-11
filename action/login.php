@@ -10,14 +10,14 @@
 
    $result=$mysqli->query("SELECT `user_id`,`username`,`password`,`fname`,`lname`,`access`,`student_id`,`staff_id` FROM `user` WHERE `username` = '$username';");
    while($row =$result->fetch_array(MYSQLI_ASSOC))
-   {
+   {//check password is valid
     if (hash_equals($row['password'],$hashpassword)) {  //success password_verify($password, $row['password'])
 
             $h_firstname=$row['fname'];
             $h_lastname= $row['lname'];
 
             echo "true";
-
+            //once log in success, create session with username, name, id, accesslevel
             $_SESSION['session_user']= $username;
             $_SESSION['name']=  $h_firstname.' '. $h_lastname;
             $_SESSION['access']=$row['access'];

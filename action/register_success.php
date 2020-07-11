@@ -23,7 +23,7 @@ if(isset($_GET['psd']))
 <head>
 <title>Success</title>
 </head>
-
+<!-- once register succss, show account information -->
 <body>
 <b>Accounter successfully created!.</b><br/>
 <p> Username:<?php echo $session_user;?></p> <br/>

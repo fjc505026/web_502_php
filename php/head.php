@@ -33,15 +33,20 @@
                         </div>
                     </div>
                 </li>
-                <?php if ($_SESSION['access']==1) {//student?>
+                <?php if ($_SESSION['access']==1) {//student access?>
                 <li class="nav-item">
                     <a class="nav-link priority" id="MyTimetable_hylink"><b>MyTimetable</b></a>
                 </li>
                 <?php }?>
+                <?php if ($_SESSION['access']>1) {//staff access?>
+                <li class="nav-item">
+                    <a class="nav-link priority" id="Erollstudent_hylink" href='../php/EnrollStudents.php'><b>EnrolledStudent</b></a>
+                </li>
+                <?php }?>
 
-                <?php if ($_SESSION['access']==5) { //UC ?>
+                <?php if ($_SESSION['access']==5) { //UC access?>
                 <li class="nav-item ">
-                    <a class="nav-link priority"  id="MasterStaff_hylink"><b>Staff</b></a>
+                    <a class="nav-link priority"  id="MasterStaff_hylink"><b>StaffList</b></a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link priority" id="MasterUnit_hylink"><b>UnitsMaster</b></a>

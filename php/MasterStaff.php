@@ -2,7 +2,7 @@
 session_start();
 include('../config/db_conn.php'); //db connection
 $query = "SELECT `id` ,`unit_code`,`unit_name`,`lecturer`,`semester` FROM `units`;";
-$result = $mysqli->query($query);     
+$result = $mysqli->query($query);
 ?>
 
 <!doctype html>
@@ -12,14 +12,14 @@ $result = $mysqli->query($query);
     <br><br>
     <!-- Staff list  -->
     <div class="container_fluid " id="Staff_ct">
-        <h2 class="text-dark">Staff list</h2>          
+        <h2 class="text-dark">Staff list</h2>
         <table class="table table-hover bg-secondary" id="Staff_tb">
           <thead>
             <tr>
               <th>Name</th>
               <th>Qualification</th>
               <th>Expertise</th>
-              <th>Preferred days of teaching</th>
+              <th>Available days</th>
               <th>Consultation hours</th>
               <th>Current teaching units</th>
               <th id="tut_col">Allocation</th>
@@ -76,7 +76,7 @@ $result = $mysqli->query($query);
                           </tbody>
                         </table>
                       </div>
-              
+
                       <div class="row">
                         <p class="col-sm"><b>Category</b></p>
                         <label class="form-check form-check-label col-sm DConly">
@@ -98,7 +98,7 @@ $result = $mysqli->query($query);
                   <button  id="btn_alloc_cfm" class="btn btn-success" data-dismiss="modal">Comfirm</button>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
-              
+
           </div>
         </div>
       </div>
@@ -127,7 +127,7 @@ $result = $mysqli->query($query);
                               </tr>
                             </thead>
                             <tbody id="current_alloc">
-                             
+
                             </tbody>
                           </table>
                         </div>
@@ -149,7 +149,7 @@ $result = $mysqli->query($query);
 function showData(){           //staff list table ajax request
         $.ajax({
             url: '../action/MasterStaffData.php?a=view',
-            method:'GET' 
+            method:'GET'
         }).done(function(data) {
             // show staff list
             $('#Staff_body').html(data);
@@ -158,14 +158,14 @@ function showData(){           //staff list table ajax request
               staff_id=this.id;  //btn_id is the staff_id
               $.ajax({
                       url: '../action/MasterStaffData.php?a=DCalloc',
-                      method:'GET' 
+                      method:'GET'
                   }).done(function(data) {
                       $('#UnitCode').html(data);
                   })
               //clear lecture timeslot  when select UC
-              $('#radio_UC').click(function(){   
+              $('#radio_UC').click(function(){
                 role="UC";
-                $('#timeAlloc').html('');   
+                $('#timeAlloc').html('');
               });
 
               //show lecture timeslot in staff allocation model
@@ -173,41 +173,41 @@ function showData(){           //staff list table ajax request
                 role="lec";
                 $.ajax({
                       url: '../action/MasterStaffData.php?a=lectime&ucode='+$('#UnitCode').val()+'&cam='+$('#campus').val()+'&period='+$('#studyPeriod').val(),
-                      method:'GET' 
+                      method:'GET'
                   }).done(function(data) {
-                    $('#timeAlloc').html(data);    
-                  })    
+                    $('#timeAlloc').html(data);
+                  })
               });
 
-              //show tutorial timeslot in staff allocation model 
-              $('#radio_tut').click(function(){ 
+              //show tutorial timeslot in staff allocation model
+              $('#radio_tut').click(function(){
                 role="tut";
                 $.ajax({
                       url: '../action/MasterStaffData.php?a=tuttime&ucode='+$('#UnitCode').val()+'&cam='+$('#campus').val()+'&period='+$('#studyPeriod').val(),
-                      method:'GET' 
+                      method:'GET'
                   }).done(function(data) {
-                    $('#timeAlloc').html(data); 
-                  })    
+                    $('#timeAlloc').html(data);
+                  })
               });
 
-              $('#btn_alloc_cfm').click(function(){ 
+              $('#btn_alloc_cfm').click(function(){
                 $.ajax({
                     url: '../action/staffAlloc.php?a=add&sid='+staff_id+'+&ucode='+$('#UnitCode').val()+'&cam='+$('#campus').val()+'&period='+$('#studyPeriod').val()+'&role='+role+'&actID='+$('#allocTime').val(),
-                    method:'GET' 
+                    method:'GET'
                   }).done(function(data) {
-                    console.log(data); 
+                    console.log(data);
                     location.reload();
-                  }) 
-              });        
+                  })
+              });
             });
 
 
             // request data in  remove unit model
             $('.btn_remv').click(function(){
               staff_id=this.id;  //btn_id is the staff_id
-              $.ajax({
+              $.ajax({  //show remove modal data
                       url: '../action/MasterStaffData.php?a=DCremv&sid='+staff_id,
-                      method:'GET' 
+                      method:'GET'
                   }).done(function(data) {
                       $('#current_alloc').html(data);
                       //remove modal confirm button
@@ -217,12 +217,12 @@ function showData(){           //staff list table ajax request
                           //alert($("#alloc_selected").val());
                           $.ajax({
                             url: '../action/staffAlloc.php?a=remv&sid='+staff_id+'+&actID='+$("#alloc_selected").val(),
-                            method:'GET' 
+                            method:'GET'
                           }).done(function(data) {
-                            console.log(data); 
+                            console.log(data);
                             location.reload();
 
-                          }) 
+                          })
                         }else {
                           alert("please choose a option!");
 
@@ -230,18 +230,18 @@ function showData(){           //staff list table ajax request
 
                       })
 
-              
+
 
 
                   })
             })
-        });    
+        });
     }
- 
+
 //default: DC log in
 $(function(){
 
-    //log out 
+    //log out
     $("#lg_out").click(function(){
         AccountValid=false;
         $(".afterLog").hide();
@@ -249,7 +249,7 @@ $(function(){
        // window.setTimeout("window.location='../index.html'", 0); //log out return to main page
     });
 
-    //DClog in 
+    //DClog in
     $("#DC_btn").click(function(){
       AccountValid=true;
       $(".afterLog").show();
@@ -268,13 +268,13 @@ $(function(){
       });
     });
 
-    //UC log in 
+    //UC log in
     $("#UC_btn").click(function(){
       AccountValid=true;
       $(".afterLog").show();
       $(".beforeLog").hide();
       $(".DConly").hide();
-      
+
        $("#Logged_banner").text("Hello (UC)");
        $("#Staff_body").empty();
        $.ajax({
@@ -288,7 +288,7 @@ $(function(){
           });
        }
       });
-     
+
     });
 });
 

@@ -9,14 +9,14 @@ include('../config/db_conn.php'); //db connection
 <?php  include('head.php');?>
   <!-- Enrolled table  -->
   <div class="container" id="timetable_ct">
-  <h2 class="text-muted">Enrolled Unit</h2>          
+  <h2 class="text-muted">Enrolled Unit</h2>
   <table class="table table-hover bg-secondary" id="timetable_tb">
     <thead>
     <tr>
     <th>Unit code</th>
     <th>Lecture time</th>
     <th>Available tutorial time</th>
-    <th> &nbsp;</th>
+    <th>Tutorial allocate</th>
     </tr>
     </thead>
     <tbody id="hUnits">
@@ -135,37 +135,41 @@ include('../config/db_conn.php'); //db connection
 </html>
 
 <script>
-var demo_unit = {Day:"Monday", Start:"10:00", End:"12:00",Code:"<?php echo "test";?>",Name:"profession year", Coordinator:"Jingchen"};
+//var demo_unit = {Day:"Monday", Start:"10:00", End:"12:00",Code:"<?php echo "test";?>",Name:"profession year", Coordinator:"Jingchen"};
 
 function showData(){           //ajax request
   $.ajax({
     url: '../action/Timetabledata.php?a=view',
-    method:'GET' 
+    method:'GET'
   }).done(function(data) {
     // console.log(data);
     $('#hUnits').html(data);
+    //request for timetable data
+    $.ajax({
+      type:'GET',
+      dataType: 'json',
+      url:'../action/sample.json',
+      success:function(data){
+        //$("#hUnits").empty();
+        reloadTimeable();
+        $.each(data, function(i,unit){
+          console.log(unit.Day);
+          fillTimeable(unit);
+        });
+      }
+    });
+
+    //tutorial allocate button
     $(".alloc_btn").click(function(){
-      window.location.href="./TutAllocation.php?p="+this.id; 
+      window.location.href="./TutAllocation.php?p="+this.id;
     });
+     //tutorial remove button
     $(".remv_btn").click(function(){
-      window.location.href="../action/tutEnroll.php?a=withdraw&p="+this.id; 
+      window.location.href="../action/tutEnroll.php?a=withdraw&p="+this.id;
     });
-    // fillTimeable(demo_unit); 
-  }) ; 
-  
-  $.ajax({
-    type:'GET',
-    dataType: 'json',
-    url:'../action/sample.json',
-    success:function(data){ 
-      //$("#hUnits").empty();
-      reloadTimeable();
-      $.each(data, function(i,unit){
-        console.log(unit.Day);
-        fillTimeable(unit);    
-      });
-    }
-  });
+
+  }) ;
+
 };
 
 //when user change, reload timetable
@@ -191,10 +195,10 @@ function fillTimeable(unit){
   $("#htimetable tr:nth-of-type("+timeline+") td:nth-of-type("+weekday+")").removeClass("no-events").addClass("has-events row-fluid lecture bg-primary");
   $("#htimetable tr:nth-of-type("+timeline+") td:nth-of-type("+weekday+")").text(unit.Code+"/"+unit.Name+"/"+unit.Coordinator);
   $("#htimetable tr:nth-of-type("+timeline+") td:nth-of-type("+weekday+")").attr('rowspan','1');
-  
+
   if(timespan>1){
     for(var i=1; i<timespan;i++)
-    {  
+    {
       var tmp=timeline+i;
       $("#htimetable tr:nth-of-type("+tmp+") td:nth-of-type("+weekday+")").removeClass("no-events").addClass("has-events row-fluid lecture bg-primary");
     }

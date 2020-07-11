@@ -32,7 +32,6 @@ $(document).ready(function () {
         success: function (data, status, xhr) {
           console.log(data);
           if (data.indexOf("true") != -1) {
-            //alert("log in success");
             AccountValid = true;
             $(".afterlog").show();
             $(".beforelog").hide();

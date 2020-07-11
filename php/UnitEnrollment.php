@@ -9,7 +9,7 @@ echo "<script> sid=".$_SESSION['stu_id'].";</script>"
 <html lang="en">
     <?php  include('head.php');?>
     <title>Unit Enrolment</title>
-  
+    <!-- two fllter bars -->
     <div class="row" id="filterGroup">
             <div class="col-sm-3">
                 <label class="mr-sm-2 text-secondary" for="campus"><b>Filter by campus</b></label>
@@ -30,11 +30,11 @@ echo "<script> sid=".$_SESSION['stu_id'].";</script>"
                     <option value="Spring School">Spring School</option>
                 </select>
             </div>
-        </div> 
+        </div>
 
         <!-- UnitEnrollment table  -->
         <div class="container" id="UnitEnrol_ct">
-            <h2 class="text-muted">Unit Available</h2>          
+            <h2 class="text-muted">Unit Available</h2>
             <table class="table table-hover bg-secondary" id="UnitEnrol_tb">
                 <thead>
                 <tr>
@@ -98,20 +98,21 @@ echo "<script> sid=".$_SESSION['stu_id'].";</script>"
 
 
 <script>
-    var last_campus_value='*'; 
+    var last_campus_value='*';
     var last_period_value='*';
     var rowID_selected;
 
     function showData(){           //ajax request
+        // show all units information
         $.ajax({
             url: '../action/UnitEnrolldata.php?a=view',
-            method:'GET' 
+            method:'GET'
         }).done(function(data) {
             $('tbody').html(data);
             if(Accesslevel==0)
                 $('.act_btn').hide();
             else  $('.act_btn').show();
-
+            // get current unit ID when click enroll or withdraw button
             $('.en_btn').click(function(){
                 actID_selected=this.id;
             });
@@ -119,9 +120,9 @@ echo "<script> sid=".$_SESSION['stu_id'].";</script>"
             $('.wd_btn').click(function(){
                     actID_selected=this.id;
             });
-        }) 
+        })
     };
-
+    // the two fliters  function
     $('.custom-select').click(function(){
         var campus_value=$('#campus').val();
         var period_value=$('#studyPeriod').val();
@@ -132,64 +133,65 @@ echo "<script> sid=".$_SESSION['stu_id'].";</script>"
             //alert(str);
             $.ajax({
                 url:str ,
-                method:'GET' 
+                method:'GET'
             }).done(function(data) {
                 //console.log(data);
                 $('tbody').html(data);
                 if(Accesslevel==0)
                     $('.act_btn').hide();
                 else  $('.act_btn').show();
-            })     
+            })
         }
         last_campus_value=campus_value;
         last_period_value=period_value;
     });
 
- 
-   
+
+
     $(function() {
+        //unit enroll function
         $('#enrollCfm_btn').click(function(){
             var str_value="&sid="+sid+"&actid="+actID_selected;
             var str ='../action/UnitEnrolldata.php?a=enroll'+str_value;
             //alert(str);
             $.ajax({
                 url:str ,
-                method:'GET' 
+                method:'GET'
             }).done(function(data) {
                 //console.log(data);
                 $('tbody').html(data);
                 if(Accesslevel==0)
                     $('.act_btn').hide();
                 else  $('.act_btn').show();
-               
+
             });
-            window.location.href="./UnitEnrollment.php";     
+            window.location.href="./UnitEnrollment.php";
         });
 
-        
+        //unit withdraw function
         $('#withdrawCfm_btn').click(function(){
             var str_value="&sid="+sid+"&actid="+actID_selected;
             var str ='../action/UnitEnrolldata.php?a=wtd'+str_value;
             //alert(str);
             $.ajax({
                 url:str ,
-                method:'GET' 
+                method:'GET'
             }).done(function(data) {
                 //console.log(data);
                 $('tbody').html(data);
                 if(Accesslevel==0)
                     $('.act_btn').hide();
                 else  $('.act_btn').show();
-               
+
             });
-            window.location.href="./UnitEnrollment.php";    
+            window.location.href="./UnitEnrollment.php";
         });
     });
 
-</script> 
+</script>
 
 
 
 
-     
+
 

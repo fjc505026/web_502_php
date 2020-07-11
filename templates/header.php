@@ -37,10 +37,15 @@
                     <a class="nav-link priority" id="MyTimetable_hylink"><b>MyTimetable</b></a>
                 </li>
                 <?php }?>
+                <?php if ($_SESSION['access']>1) {//staff?>
+                <li class="nav-item">
+                    <a class="nav-link priority" id="Erollstudent_hylink" href='./php/EnrollStudents.php'><b>EnrolledStudent</b></a>
+                </li>
+                <?php }?>
 
                 <?php if ($_SESSION['access']==5) { //UC ?>
                 <li class="nav-item ">
-                    <a class="nav-link priority"  id="MasterStaff_hylink"><b>Staff</b></a>
+                    <a class="nav-link priority"  id="MasterStaff_hylink"><b>StaffList</b></a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link priority" id="MasterUnit_hylink"><b>UnitsMaster</b></a>

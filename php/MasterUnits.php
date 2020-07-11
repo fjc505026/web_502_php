@@ -13,7 +13,7 @@ $result = $mysqli->query($query);
 
     <!-- UnitDetail table  -->
     <div class ="container">
-        <h2 align ="center">Unit details</h2>
+        <h2 align ="center">Unit Master list</h2>
         <!-- <a href="tute7_main.php"> Back to Main</a> -->
         <button class="btn btn-dark float-right"  data-toggle="modal" data-target="#search_modal">Search</button>
 
@@ -51,9 +51,9 @@ $result = $mysqli->query($query);
     }
 
     $("#mange_btn").click(function(){
-        if(Accesslevel<2)
+        if(Accesslevel<4)    // only DC can accesss
         alert("you do not have the access right");
-        if(Accesslevel>=2)
+        if(Accesslevel>=4)
         window.location.href="./MasterUnits_manage.php";
     });
 

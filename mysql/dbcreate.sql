@@ -112,15 +112,25 @@ INSERT INTO `activity` (`type`, `day`, `start_time`, `end_time`,`unit_id`,`locat
 ('lecture', 'Wenseday', '14:00', '15:00', 8,1);  --8
 
 INSERT INTO `activity` (`type`, `day`, `start_time`, `end_time`,`unit_id`,`location_id`) VALUES
-('tutorial', 'Monday',   '13:00', '14:00', 1,5),   --1
+('tutorial', 'Monday',   '13:00', '14:00', 1,5),   --9
 ('tutorial', 'Tuesday',   '9:00', '10:00', 1,6),
-('tutorial', 'Tuesday',  '15:00','116:00', 2,6),
+('tutorial', 'Tuesday',  '15:00','16:00', 2,6),
+('tutorial', 'Tuesday',  '16:00','17:00', 2,6),
 ('tutorial', 'Wenseday', '11:00', '12:00', 3,5),
 ('tutorial', 'Thursday', '14:00','16:00', 4,6),
 ('tutorial', 'Friday',   '9:00','10:00', 5,3),
 ('tutorial', 'Monday',   '16:00', '17:00', 6,2),
 ('tutorial', 'Tuesday',  '9:00', '10:00', 7,3),
 ('tutorial', 'Wenseday', '10:00', '11:00', 8,2);  --8
+
+INSERT INTO `activity` (`type`, `day`, `start_time`, `end_time`,`unit_id`,`location_id`,`period`) VALUES
+('tutorial', 'Tuesday',  '16:00','17:00', 2,6,'Semester 1'),
+('tutorial', 'Wenseday', '12:00', '13:00', 3,5,'Semester 1'),
+('tutorial', 'Thursday', '15:00','17:00', 4,6,'Semester 1'),
+('tutorial', 'Friday',   '11:00','12:00', 5,3,'Semester 1'); -21
+('tutorial', 'Tuesday',   '11:00','12:00', 6,2,'Semester 1'),
+('tutorial', 'Thursday',   '11:00','12:00', 7,3,'Semester 1'),
+('tutorial', 'Monday',   '11:00','12:00', 8,1,'Semester 1');
 
 
 INSERT INTO `location` (`room_name`, `capacity`,`campus`)  VALUES
@@ -157,3 +167,25 @@ SELECT act.activity_id ,u.unit_code,u.unit_name,u.lecturer,u.semester,loc.campus
         JOIN units u
         ON    act.unit_id=u.id
         WHERE act.type='lecture';
+
+INSERT INTO `jfan6`.`teach` (`staff_id`, `act_id`)
+VALUES ('99999999', '3'),
+        ('11111222', '8'),
+        ('33338888', '9'),
+        ('77778888', '11'),
+        ('56788765', '12'),
+        ('88888888', '13'),
+        ('98761234', '14'),
+        ('33338888', '15'),
+        ('88888888', '16'),
+        ('99999999', '17'),
+
+        ('11112222', '18'),
+        ('22223333', '19'),
+        ('55556666', '20'),
+        ('99998888', '21'),
+        ('87654321', '22'),
+        ('88884444', '23'),
+        ('12345678', '24'),
+
+
